@@ -1,2 +1,2 @@
 # App-Demo-of-COVID-19-Recognition-Model
-PyTorch Android example of Speech Recognition in applications
+This project is about a COVID-19 voice recognition Android demo app built on the powerful PyTorch Mobile platform.
