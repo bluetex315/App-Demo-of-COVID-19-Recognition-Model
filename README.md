@@ -6,4 +6,4 @@ Please refer to AutoSpeech and COVID-19_DataHackathon_Sensor_Informatics_Challen
 See https://github.com/VITA-Group/AutoSpeech and https://github.com/huinli/COVID-19_DataHackathon_Sensor_Informatics_Challenge
 
 ## Converting the PyTorch Model to TorchScript
-Please execute `pth2ptl.py` in COVID-19_DataHackathon_Sensor_Informatics_Challenge/fusion_resnet/repos/auto
+Please execute `pth2ptl.py` in `COVID-19_DataHackathon_Sensor_Informatics_Challenge/fusion_resnet/repos/auto` to convert the breathing, cough, speech, and ffn model in `checkpoint` to TorchScript
