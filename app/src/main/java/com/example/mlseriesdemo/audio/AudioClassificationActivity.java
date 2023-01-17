@@ -379,33 +379,33 @@ public class AudioClassificationActivity extends Activity {
         float[] coughProcessedBuffer = process_wav(RECORDING_LENGTH_C, recordingBufferCough);
         float[] speechProcessedBuffer = process_wav(RECORDING_LENGTH_S, recordingBufferSpeech);
 
-        Log.d("","can we make here 275?"+RECORDING_LENGTH_B+" "+RECORDING_LENGTH_C+" "+RECORDING_LENGTH_S);
+//         Log.d("","can we make here 275?"+RECORDING_LENGTH_B+" "+RECORDING_LENGTH_C+" "+RECORDING_LENGTH_S);
         JLibrosa JLib = new JLibrosa();
 
         Complex[][] breathing_stft = JLib.generateSTFTFeatures(breathingProcessedBuffer, SAMPLE_RATE, nMFCC, N_FFT, n_mels, HOP_LENGTH);
         Complex[][] cough_stft = JLib.generateSTFTFeatures(coughProcessedBuffer, SAMPLE_RATE, nMFCC, N_FFT, n_mels, HOP_LENGTH);
         Complex[][] speech_stft = JLib.generateSTFTFeatures(speechProcessedBuffer, SAMPLE_RATE, nMFCC, N_FFT, n_mels, HOP_LENGTH);
 
-        Log.d("","can we make here 298?"+breathing_stft[0][0]+" "+breathing_stft[0][0]);
+//         Log.d("","can we make here 298?"+breathing_stft[0][0]+" "+breathing_stft[0][0]);
 
         if (module_b == null) {
             module_b = LiteModuleLoader.load(assetFilePath(getApplicationContext(), "breathing_optimized.ptl"));
-            Log.d("","can we make here 392?");
+//             Log.d("","can we make here 392?");
         }
 
         if (module_c == null) {
             module_c = LiteModuleLoader.load(assetFilePath(getApplicationContext(), "cough_optimized.ptl"));
-            Log.d("","can we make here 397?");
+//             Log.d("","can we make here 397?");
         }
 
         if (module_s == null) {
             module_s = LiteModuleLoader.load(assetFilePath(getApplicationContext(), "speech_optimized.ptl"));
-            Log.d("","can we make here 402?");
+//             Log.d("","can we make here 402?");
         }
 
         if (module_ffn == null) {
             module_ffn = LiteModuleLoader.load(assetFilePath(getApplicationContext(), "ffn_optimized.ptl"));
-            Log.d("","can we make here 407?");
+//             Log.d("","can we make here 407?");
         }
 
 //        int total_length = breathing_stft.length*breathing_stft[0].length;
@@ -421,7 +421,7 @@ public class AudioClassificationActivity extends Activity {
         double[][] cough_input = new double[257][300];
 //        double[][] breathing_input = new double[breathing_stft.length][breathing_stft[0].length];
         double[][] speech_input = new double[257][300];
-        Log.d("","can we make here 417?");
+//         Log.d("","can we make here 417?");
 
         for (int i = 0; i < breathing_input.length; i ++){
             for (int j = 0; j < breathing_input[0].length; j ++){
@@ -463,25 +463,25 @@ public class AudioClassificationActivity extends Activity {
 //            return test_sequence
 //
 
-        Log.d("","can we make here 459?");
+//         Log.d("","can we make here 459?");
         Tensor inTensor_b = Tensor.fromBlob(inTensorBuffer_b , new long[]{1, breathing_input[0].length, breathing_input.length});
         Tensor inTensor_c = Tensor.fromBlob(inTensorBuffer_c , new long[]{1, cough_input[0].length, cough_input.length});
         Tensor inTensor_s = Tensor.fromBlob(inTensorBuffer_s , new long[]{1, speech_input[0].length, speech_input.length});
 
-        for (long shape : inTensor_b.shape())
-            Log.d("shape is", String.valueOf(shape));
+//         for (long shape : inTensor_b.shape())
+//             Log.d("shape is", String.valueOf(shape));
 
         final Tensor result_b = module_b.forward(IValue.from(inTensor_b)).toTensor();
         final Tensor result_c = module_c.forward(IValue.from(inTensor_c)).toTensor();
         final Tensor result_s = module_s.forward(IValue.from(inTensor_s)).toTensor();
 
-        Log.d("", "can we make here 471");
-        for (long shape : result_b.shape())
-            Log.d("can we make here 473 shape is", String.valueOf(shape));
-        for (long shape : result_c.shape())
-            Log.d("can we make here 475 shape is", String.valueOf(shape));
-        for (long shape : result_s.shape())
-            Log.d("can we make here 477 shape is", String.valueOf(shape));
+//         Log.d("", "can we make here 471");
+//         for (long shape : result_b.shape())
+//             Log.d("can we make here 473 shape is", String.valueOf(shape));
+//         for (long shape : result_c.shape())
+//             Log.d("can we make here 475 shape is", String.valueOf(shape));
+//         for (long shape : result_s.shape())
+//             Log.d("can we make here 477 shape is", String.valueOf(shape));
 
         float[] result_b_ffn = result_b.getDataAsFloatArray();
         float[] result_c_ffn = result_c.getDataAsFloatArray();
